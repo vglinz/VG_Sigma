@@ -14,7 +14,7 @@ jobs:
   archive:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - name: Set up Python 3.11
@@ -30,6 +30,7 @@ jobs:
       with:
         reviewers: nasbench, frack113, phantinuss
         delete-branch: true
+        branch: 'create-pull-request/reference-archiver'
         commit-message: 'chore: archive new rule references and update cache file'
         title: 'Archive New Rule References'
         body: |

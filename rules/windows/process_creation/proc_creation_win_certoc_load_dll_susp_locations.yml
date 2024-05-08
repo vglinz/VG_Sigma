@@ -3,7 +3,7 @@ id: 84232095-ecca-4015-b0d7-7726507ee793
 related:
     - id: 242301bc-f92f-4476-8718-78004a6efd9f
       type: similar
-status: experimental
+status: test
 description: Detects when a user installs certificates by using CertOC.exe to load the target DLL file.
 references:
     - https://twitter.com/sblmsrsn/status/1445758411803480072?s=20
@@ -11,6 +11,7 @@ references:
     - https://lolbas-project.github.io/lolbas/Binaries/Certoc/
 author: Nasreddine Bencherchali (Nextron Systems)
 date: 2023/02/15
+modified: 2024/03/05
 tags:
     - attack.defense_evasion
     - attack.t1218
@@ -22,9 +23,7 @@ detection:
         - Image|endswith: '\certoc.exe'
         - OriginalFileName: 'CertOC.exe'
     selection_cli:
-        CommandLine|contains:
-            - ' -LoadDLL '
-            - ' /LoadDLL '
+        CommandLine|contains|windash: ' -LoadDLL '
     selection_paths:
         CommandLine|contains:
             - '\Appdata\Local\Temp\'

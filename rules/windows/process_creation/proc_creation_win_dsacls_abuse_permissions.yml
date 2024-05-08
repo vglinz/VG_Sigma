@@ -1,6 +1,6 @@
 title: Potentially Over Permissive Permissions Granted Using Dsacls.EXE
 id: 01c42d3c-242d-4655-85b2-34f1739632f7
-status: experimental
+status: test
 description: Detects usage of Dsacls to grant over permissive permissions
 references:
     - https://ss64.com/nt/dsacls.html
@@ -9,7 +9,7 @@ author: Nasreddine Bencherchali (Nextron Systems)
 date: 2022/06/20
 modified: 2023/02/04
 tags:
-    - attack.execution
+    - attack.defense_evasion
     - attack.t1218
 logsource:
     category: process_creation

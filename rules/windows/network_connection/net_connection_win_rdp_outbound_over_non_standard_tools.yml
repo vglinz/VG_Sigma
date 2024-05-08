@@ -1,12 +1,14 @@
 title: Outbound RDP Connections Over Non-Standard Tools
 id: ed74fe75-7594-4b4b-ae38-e38e3fd2eb23
 status: test
-description: Detects Non-Standard Tools Connecting to TCP port 3389 indicating possible lateral movement
+description: |
+    Detects Non-Standard tools initiating a connection over port 3389 indicating possible lateral movement.
+    An initial baseline is required before using this utility to exclude third party RDP tooling that you might use.
 references:
     - https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-0708
 author: Markus Neis
 date: 2019/05/15
-modified: 2023/04/20
+modified: 2024/02/09
 tags:
     - attack.lateral_movement
     - attack.t1021.001
@@ -36,21 +38,22 @@ detection:
     filter_optional_chrome:
         Image: 'C:\Program Files\Google\Chrome\Application\chrome.exe'
     filter_optional_third_party:
-        - '\FSAssessment.exe'
-        - '\FSDiscovery.exe'
-        - '\MobaRTE.exe'
-        - '\mRemote.exe'
-        - '\mRemoteNG.exe'
-        - '\Passwordstate.exe'
-        - '\RemoteDesktopManager.exe'
-        - '\RemoteDesktopManager64.exe'
-        - '\RemoteDesktopManagerFree.exe'
-        - '\RSSensor.exe'
-        - '\RTS2App.exe'
-        - '\RTSApp.exe'
-        - '\spiceworks-finder.exe'
-        - '\Terminals.exe'
-        - '\ws_TunnelService.exe'
+        Image|endswith:
+            - '\FSAssessment.exe'
+            - '\FSDiscovery.exe'
+            - '\MobaRTE.exe'
+            - '\mRemote.exe'
+            - '\mRemoteNG.exe'
+            - '\Passwordstate.exe'
+            - '\RemoteDesktopManager.exe'
+            - '\RemoteDesktopManager64.exe'
+            - '\RemoteDesktopManagerFree.exe'
+            - '\RSSensor.exe'
+            - '\RTS2App.exe'
+            - '\RTSApp.exe'
+            - '\spiceworks-finder.exe'
+            - '\Terminals.exe'
+            - '\ws_TunnelService.exe'
     filter_optional_thor:
         Image|endswith:
             - '\thor.exe'
@@ -61,6 +64,10 @@ detection:
         Image|endswith: '\Ranger\SentinelRanger.exe'
     filter_optional_firefox:
         Image: 'C:\Program Files\Mozilla Firefox\firefox.exe'
+    filter_optional_tsplus:  # Some RAS
+        Image:
+            - 'C:\Program Files\TSplus\Java\bin\HTML5service.exe'
+            - 'C:\Program Files (x86)\TSplus\Java\bin\HTML5service.exe'
     filter_optional_null:
         Image: null
     filter_optional_empty:
