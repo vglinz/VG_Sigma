@@ -1,9 +1,10 @@
-title: AdminSDHolder WriteDAC
+title: AD Container WriteDAC
 id: 57bc5954-f99b-44b5-a5e9-fb061e6d3532
-description: Detects WRITE_DAC to AdminSDHolder object > possible AdminSDHolder Backdooring
+description: Detects WRITE_DAC to Container object > possible AdminSDHolder Backdooring
 kind: evtx
 status: experimental
 date: 2023/11/30
+modified: 2024/05/09
 author: Charles BLANC-ROLIN @woundride
 references:
     - https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/how-to-abuse-and-backdoor-adminsdholder-to-obtain-domain-admin-persistence
@@ -22,8 +23,6 @@ detection:
         AccessMask: '0x40000'
         ObjectType|contains:
             - 'bf967a8b-0de6-11d0-a285-00aa003049e2'
-        ObjectName|contains:
-            - '80324499-e1db-4754-aac9-824caef211f4'
     condition: selection
 falsepositives:
     - Unknown
